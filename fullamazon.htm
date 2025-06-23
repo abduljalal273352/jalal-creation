@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Online Store - Best Deals & Products</title>
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/891/891462.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstyle.css">
+  <link rel="stylesheet" href="signup.html">
+  <style>
+  * { box-sizing: border-box; }
+  body {
+  margin: 0;
+  font-family: "Amazon Ember", Arial, sans-serif;
+  background-color: #EAEDED;
+  color: #111;
+  }
+  a { text-decoration: none; color: #007185; }
+  a:hover { text-decoration: underline; }
+  header {
+    position: sticky;
+    top: 0;
+    background-color: #0f151b;
+    color: white;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 1000;
+    min-height: 60px;
+  }
+  .amazon-logo {
+    width: 113px;
+    height: 32px;
+    object-fit: contain;
+    margin-right: 18px;
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .location {
+    font-size: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.2;
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 80px;
+  }
+  .location strong {
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: 0.2px;
+  }
+  .search-bar {
+    flex: 1;
+    margin: 0 20px;
+    position: relative;
+    min-width: 180px;
+    max-width: 600px;
+    display: flex;
+    align-items: stretch;
+  }
+  .search-wrapper {
+    display: flex;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px #febd69;
+    background: #fff;
+  }
+  .search-select {
+    background: #f3f3f3;
+    border: none;
+    padding: 10px 8px;
+    font-size: 14px;
+    width: 52px;
+    border-right: 1px solid #ccc;
+    color: #555;
+    outline: none;
+  }
+  .search-input {
+    flex: 1;
+    padding: 10px 10px 10px 0;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #111;
+  }
+  .search-button {
+    background-color: #febd69;
+    border: none;
+    padding: 0 18px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #111;
+    transition: background 0.2s;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-button:hover {
+    background-color: #f3a847;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+    min-width: 200px;
+    justify-content: flex-end;
+  }
+  .language-dropdown {
+    position: relative;
+    margin-right: 8px;
+  }
+  .language-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    font-size: 13px;
+    color: #fff;
+    gap: 4px;
+  }
+  .account, .returns, .cart {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 6px;
+    min-width: 70px;
+  }
+  .account strong, .returns strong, .cart strong {
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .cart {
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+    min-width: 60px;
+  }
+  @media (max-width: 900px) {
+    .header-right { gap: 10px; font-size: 11px; }
+    .product-box { min-width: 140px; max-width: 140px; }
+    .hero-banner { height: 300px; }
+    .slide img { height: 300px; }
+    .search-bar { margin: 0 8px; }
+  }
+  .secondary-nav {
+  background-color: #232f3e;
+  color: white;
+  display: flex;
+  padding: 10px 25px;
+  gap: 15px;
+  font-size: 14px;
+  overflow-x: auto;
+  user-select: none;
+  }
+  .nav-item {
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+  }
+  .nav-item:hover { background-color: #37475a; }
+  ::-webkit-scrollbar { height: 6px; }
+  ::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
+  }
+  .hero-banner {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  z-index: 1;
+  }
+  .product-section:first-of-type {
+  margin-top: -140px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+  }
+  .slide { flex: 0 0 100%; height: 100%; }
+  .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  }
+  .arrows {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+  }
+  .arrow {
+  pointer-events: all;
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+  }
+  .arrow:hover { background-color: rgba(0,0,0,0.7); }
+  .dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 10;
+  }
+  .dot {
+  width: 12px;
+  height: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  }
+  .dot.active { background-color: #f90; }
+  .product-section {
+  background-color: white;
+  margin: 0 auto ;
+  padding: 20px 25px 15px;
+  max-width: 1200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  position: relative;
+  z-index: 2;
+  }
+  .product-section:first-of-type {
+  margin-top: -140px;
+  position: relative;
+  z-index: 10;
+  }
+  .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  }
+  .section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  }
+  .see-all {
+  font-size: 14px;
+  color: #007185;
+  cursor: pointer;
+  }
+  .see-all:hover { text-decoration: underline; }
+  .product-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 10px;
+  }
+  .product-row::-webkit-scrollbar { height: 8px; }
+  .product-row::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+  }
+  .product-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-width: 190px;
+  max-width: 190px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  }
+  .product-box:hover { box-shadow: 0 4px 12px rgb(0 0 0 / 0.2); }
+  .product-box img {
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  }
+  .product-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 8px;
+  flex-grow: 1;
+  }
+  .product-rating { color: #f0c14b; margin-bottom: 6px; }
+  .product-price {
+  font-weight: 700;
+  font-size: 16px;
+  color: #b12704;
+  }
+  .back-to-top {
+  background-color: #37475a;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s;
+  }
+  .back-to-top:hover { background-color: #485769; }
+  footer {
+  background-color: #131921;
+  color: white;
+  text-align: center;
+  padding: 40px 20px 20px;
+  }
+  .footer-columns {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  }
+  .footer-column { min-width: 150px; }
+  .footer-column h4 { margin-bottom: 15px; font-weight: 700; }
+  .footer-column ul { list-style: none; padding: 0; margin: 0; }
+  .footer-column ul li { margin-bottom: 8px; font-size: 14px; cursor: pointer; }
+  .footer-column ul li:hover { text-decoration: underline; }
+  @media(max-width: 900px) {
+  .header-right { gap: 10px; font-size: 11px; }
+  .product-box { min-width: 140px; max-width: 140px; }
+  .hero-banner { height: 300px; }
+  .slide img { height: 300px; }
+  }
+  /* Responsive for header and nav below 790px */
+  @media (max-width: 790px) {
+    header {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      padding: 10px 8px;
+      gap: 10px;
+      min-height: unset;
+    }
+    .d-flex.align-items-center[style*="min-width: 180px;"] {
+      min-width: 0 !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+    .amazon-logo {
+      margin: 0 auto;
+      display: block;
+      width: 90px !important;
+      height: auto !important;
+    }
+    .location {
+      display: none !important;
+    }
+    .search-bar {
+      margin: 10px 0 !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      order: 2;
+    }
+    .header-right {
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      width: 100% !important;
+      font-size: 12px !important;
+      order: 3;
+      min-width: 0 !important;
+    }
+    .account, .cart {
+      min-width: 0 !important;
+      padding: 0 2px !important;
+    }
+    .returns {
+      display: none !important;
+    }
+    .language-dropdown {
+      margin-right: 8px;
+    }
+    .cart {
+      font-size: 18px;
+    }
+    .secondary-nav {
+      flex-wrap: wrap;
+      padding: 10px 8px;
+      font-size: 13px;
+      gap: 8px;
+    }
+    .product-section {
+      padding: 15px 5px 10px;
+    }
+    .product-row {
+      gap: 8px;
+    }
+    .product-box {
+      min-width: 120px;
+      max-width: 120px;
+      padding: 6px;
+    }
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      justify-content: center !important;
+      padding: 8px 2px !important;
+      gap: 8px !important;
+      min-height: unset !important;
+    }
+    .location {
+      display: none !important;
+    }
+    .search-bar {
+      margin: 10px 0 !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      order: 2;
+    }
+    .header-right {
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      gap: 6px !important;
+      width: 100% !important;
+      font-size: 11px !important;
+      order: 3;
+      min-width: 0 !important;
+    }
+    .account, .cart {
+      min-width: 0 !important;
+      padding: 0 2px !important;
+    }
+    .returns {
+      display: none !important;
+    }
+    .secondary-nav {
+      font-size: 12px;
+      gap: 4px;
+      padding: 8px 2px;
+      flex-wrap: wrap;
+    }
+    .product-section {
+      padding: 10px 2px 6px;
+    }
+    .product-row {
+      gap: 4px;
+    }
+    .product-box {
+      min-width: 100px;
+      max-width: 100px;
+      padding: 4px;
+    }
+    .hero-banner {
+      height: 120px;
+    }
+    .slide img {
+      height: 120px;
+    }
+  }
+  /* Extra fix for very small screens (max-width: 400px) */
+  @media (max-width: 400px) {
+    header {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      padding: 4px 0 !important;
+      gap: 4px !important;
+    }
+    .amazon-logo {
+      width: 70px !important;
+      height: auto !important;
+      margin: 0 auto 2px auto !important;
+      display: block !important;
+    }
+    .header-right {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 2px !important;
+      width: 100% !important;
+      font-size: 10px !important;
+      min-width: 0 !important;
+      padding: 0 !important;
+    }
+    .language-dropdown {
+      width: 100% !important;
+      margin: 0 !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+    }
+    .language-toggle {
+      width: 100% !important;
+      justify-content: flex-end !important;
+      font-size: 12px !important;
+      padding: 4px 0 !important;
+    }
+    .language-panel {
+      left: 0 !important;
+      right: auto !important;
+      width: 98vw !important;
+      min-width: 0 !important;
+      font-size: 12px !important;
+      padding: 10px 2vw !important;
+      box-sizing: border-box !important;
+    }
+    .account.dropdown {
+      min-width: 0 !important;
+      width: 100% !important;
+      padding: 0 !important;
+      font-size: 12px !important;
+    }
+    .account .dropdown-menu {
+      left: 0 !important;
+      right: auto !important;
+      min-width: 98vw !important;
+      width: 98vw !important;
+      font-size: 12px !important;
+      padding: 10px 2vw !important;
+      box-sizing: border-box !important;
+    }
+    .cart {
+      min-width: 0 !important;
+      width: 100% !important;
+      font-size: 16px !important;
+      padding: 0 !important;
+      justify-content: flex-end !important;
+    }
+    .search-bar {
+      margin: 6px 0 !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      order: 2;
+    }
+    .search-select {
+      width: 40px !important;
+      font-size: 12px !important;
+      padding: 8px 2px !important;
+    }
+    .search-input {
+      font-size: 13px !important;
+      padding: 8px 2px !important;
+    }
+    .search-button {
+      font-size: 14px !important;
+      padding: 0 8px !important;
+    }
+    .secondary-nav {
+      font-size: 10px !important;
+      gap: 2px !important;
+      padding: 4px 0 !important;
+    }
+    .product-section {
+      padding: 6px 0 4px !important;
+    }
+    .product-row {
+      gap: 2px !important;
+    }
+    .product-box {
+      min-width: 80px !important;
+      max-width: 80px !important;
+      padding: 2px !important;
+      font-size: 10px !important;
+    }
+    .product-title {
+      font-size: 11px !important;
+    }
+    .product-rating, .product-price {
+      font-size: 11px !important;
+    }
+    .dropdown-menu {
+      left: 0 !important;
+      right: auto !important;
+      min-width: 98vw !important;
+      width: 98vw !important;
+      font-size: 12px !important;
+      padding: 10px 2vw !important;
+      box-sizing: border-box !important;
+    }
+  }
+  /* Ultra small screens (max-width: 300px) */
+  @media (max-width: 100%) {
+    html, body {
+      font-size: 10px !important;
+      overflow-x: hidden !important;
+    }
+    header {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      padding: 2px 0 !important;
+      gap: 2px !important;
+      min-height: unset !important;
+    }
+    .amazon-logo {
+      width: 48px !important;
+      height: auto !important;
+      margin: 0 auto 1px auto !important;
+      display: block !important;
+    }
+    .header-right {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 1px !important;
+      width: 100% !important;
+      font-size: 9px !important;
+      min-width: 0 !important;
+      padding: 0 !important;
+    }
+    .language-dropdown {
+      width: 100% !important;
+      margin: 0 !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+    }
+    .language-toggle {
+      width: 100% !important;
+      justify-content: flex-end !important;
+      font-size: 10px !important;
+      padding: 2px 0 !important;
+    }
+    .language-panel {
+      left: 0 !important;
+      right: auto !important;
+      width: 99vw !important;
+      min-width: 0 !important;
+      font-size: 10px !important;
+      padding: 6px 1vw !important;
+      box-sizing: border-box !important;
+    }
+    .account.dropdown {
+      min-width: 0 !important;
+      width: 100% !important;
+      padding: 0 !important;
+      font-size: 10px !important;
+    }
+    .account .dropdown-menu {
+      left: 0 !important;
+      right: auto !important;
+      min-width: 99vw !important;
+      width: 99vw !important;
+      font-size: 10px !important;
+      padding: 6px 1vw !important;
+      box-sizing: border-box !important;
+    }
+    .cart {
+      min-width: 0 !important;
+      width: 100% !important;
+      font-size: 12px !important;
+      padding: 0 !important;
+      justify-content: flex-end !important;
+    }
+    .search-bar {
+      margin: 3px 0 !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      order: 2;
+    }
+    .search-select {
+      width: 28px !important;
+      font-size: 9px !important;
+      padding: 4px 1px !important;
+    }
+    .search-input {
+      font-size: 10px !important;
+      padding: 4px 1px !important;
+    }
+    .search-button {
+      font-size: 10px !important;
+      padding: 0 4px !important;
+    }
+    .secondary-nav {
+      font-size: 8px !important;
+      gap: 1px !important;
+      padding: 2px 0 !important;
+    }
+    .product-section {
+      padding: 3px 0 2px !important;
+    }
+    .product-row {
+      gap: 1px !important;
+    }
+    .product-box {
+      min-width: 54px !important;
+      max-width: 54px !important;
+      padding: 1px !important;
+      font-size: 8px !important;
+    }
+    .product-title {
+      font-size: 8px !important;
+    }
+    .product-rating, .product-price {
+      font-size: 8px !important;
+    }
+    .dropdown-menu {
+      left: 0 !important;
+      right: auto !important;
+      min-width: 99vw !important;
+      width: 99vw !important;
+      font-size: 10px !important;
+      padding: 6px 1vw !important;
+      box-sizing: border-box !important;
+    }
+    .hero-banner {
+      height: 60px !important;
+    }
+    .slide img {
+      height: 60px !important;
+    }
+    .section-header h2 {
+      font-size: 12px !important;
+    }
+    .see-all {
+      font-size: 9px !important;
+    }
+    .footer-column h4 {
+      font-size: 11px !important;
+    }
+    .footer-column ul li {
+      font-size: 9px !important;
+    }
+    footer, .text-center.py-3 {
+      font-size: 9px !important;
+      padding: 10px 2px 10px !important;
+    }
+  }
+    }
+    .hero-banner {
+      height: 120px;
+    }
+    .slide img {
+      height: 120px;
+    }
+  
+  .language-dropdown { position: relative; }
+  .language-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-size: 13px;
+  }
+  .language-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 250px;
+  background: white;
+  color: black;
+  padding: 15px;
+  border: 1px solid #ccc;
+  z-index: 9999;
+  font-size: 13px;
+  }
+  .language-panel label { display: block; margin: 5px 0; }
+  .language-panel a { color: #007185; font-size: 12px; }
+  .language-dropdown:hover .language-panel { display: block; }
+  .search-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px #febd69;
+  }
+  .search-select {
+  background: #f3f3f3;
+  border: none;
+  padding: 10px 8px;
+  font-size: 14px;
+  width: 80px;
+  border-right: 1px solid #ccc;
+  }
+  .search-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  }
+  .search-button {
+  background-color: #febd69;
+  border: none;
+  padding: 0 15px;
+  font-size: 18px;
+  cursor: pointer;
+  }
+  .search-bar { flex: 1; margin: 0 20px; }
+  .side-menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.3s;
+  z-index: 1000;
+  }
+  .side-menu.open { width: 300px; }
+  .menu-header {
+  background-color: #232f3e;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  }
+  .menu-header span { display: flex; align-items: center; gap: 10px; }
+  .close-btn {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  }
+  .menu-content, .submenu { padding: 20px; }
+  .menu-list, .submenu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  }
+  .menu-list li, .submenu-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  }
+  .submenu { display: none; }
+  .submenu.active { display: block; }
+  .back-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  color: #333;
+  font-weight: bold;
+  }
+  @media (max-width: 600px) {
+    footer .row {
+      flex-wrap: wrap !important;
+      overflow-x: visible !important;
+    }
+    footer .col-6 {
+      min-width: 50% !important;
+      max-width: 50% !important;
+      flex: 0 0 50% !important;
+      display: block;
+    }
+    footer .col-md-3,
+    footer .col-sm-6 {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      flex: 1 0 50% !important;
+    }
+  }
+  .back-btn span { margin-left: 5px; }
+  body { font-family: Arial, sans-serif; background-color: #f5f5f5; color: #333; }
+  header { background-color: #131921; color: white; }
+  .amazon-logo { width: 100px; }
+  .location { color: #ccc; }
+  .search-bar { display: flex; align-items: center; }
+  .header-right { display: flex; align-items: center; gap: 20px; }
+  .secondary-nav { background-color: #232f3e; color: white; padding: 10px; display: flex; justify-content: space-between; }
+  .secondary-nav .nav-item { cursor: pointer; padding: 8px 12px; }
+  .secondary-nav .nav-item:hover { background-color: #37475a; }
+  .hero-banner { position: relative; height: 400px; overflow: hidden; margin-bottom: 20px; }
+  .slider { display: flex; transition: transform 0.5s ease-in-out; }
+  .slide img { width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header class="d-flex align-items-center justify-content-between flex-nowrap py-2 px-3" style="background-color: #131921; min-height: 60px;">
+  <!-- Logo & Location -->
+  <div class="d-flex align-items-center" style="min-width: 180px;">
+    <a href="#" style="display: flex; align-items: center;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo" class="amazon-logo" style="margin-right: 8px;"/>
+    </a>
+    <div class="location ms-2" style="display: flex; flex-direction: column; justify-content: center; min-width: 80px;">
+      <span style="font-size: 12px; color: #ccc;">Deliver to</span>
+      <strong style="font-size: 14px; color: #fff;">
+        <span style="display: flex; align-items: center;">
+          <img src="https://flagcdn.com/pk.svg" alt="Pakistan" style="width: 16px; margin-right: 4px; border-radius:2px;">
+          Pakistan
+        </span>
+      </strong>
+    </div>
+  </div>
+  <!-- Search Bar -->
+  <div class="search-bar d-flex flex-grow-1 mx-2" style="max-width: 600px; min-width: 180px;">
+    <form action="https://www.amazon.com/s" method="GET" class="d-flex w-100" style="flex:1;">
+      <div class="search-wrapper d-flex w-100">
+        <select class="search-select" aria-label="Search in" name="i">
+          <option value="aps">All</option>
+          <option value="stripbooks-intl-ship">Books</option>
+          <option value="electronics-intl-ship">Electronics</option>
+          <option value="fashion">Fashion</option>
+          <option value="music">Music</option>
+          <option value="prime-exclusive">Prime</option>
+          <option value="specialty-aps-sns">More</option>
+        </select>
+        <input type="text" name="k" class="search-input flex-grow-1" placeholder="Search Amazon" aria-label="Search"/>
+        <button type="submit" class="search-button" aria-label="Search">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;">
+            <circle cx="11" cy="11" r="8" stroke="#111" stroke-width="2"/>
+            <path d="M21 21l-4.35-4.35" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- Header Right -->
+  <div class="header-right d-flex align-items-center gap-3 flex-shrink-0" style="min-width: 260px;">
+    <!-- Language -->
+    <div class="language-dropdown" style="margin-right: 8px;">
+      <div class="language-toggle d-flex align-items-center" tabindex="0">
+        <img src="https://flagcdn.com/us.svg" alt="EN" style="width: 18px; margin-right: 4px;" />
+        <span style="color: #fff;">EN <span style="font-size:10px;">&#9660;</span></span>
+      </div>
+      <div class="language-panel">
+        <label>
+          <input type="radio" name="lang" checked />
+          <img src="https://flagcdn.com/us.svg" alt="English" style="width: 18px; margin-right: 4px;" />
+          English - EN
+        </label>
+        <label>
+          <input type="radio" name="lang" />
+          <img src="https://flagcdn.com/es.svg" alt="Español" style="width: 18px; margin-right: 4px;" />
+          Español - ES
+        </label>
+        <label>
+          <input type="radio" name="lang" />
+          <img src="https://flagcdn.com/fr.svg" alt="Français" style="width: 18px; margin-right: 4px;" />
+          Français - FR
+        </label>
+        <label>
+          <input type="radio" name="lang" />
+          <img src="https://flagcdn.com/de.svg" alt="Deutsch" style="width: 18px; margin-right: 4px;" />
+          Deutsch - DE
+        </label>
+        <label>
+          <input type="radio" name="lang" />
+          <img src="https://flagcdn.com/it.svg" alt="Italiano" style="width: 18px; margin-right: 4px;" />
+          Italiano - IT
+        </label>
+        <div style="margin-top: 10px;">
+          <a href="#">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <!-- Account -->
+    <div class="account dropdown" style="min-width: 70px; position: relative;">
+      <span style="font-size: 12px;">Hello, <span style="font-weight:600;">Sign in</span></span><br />
+      <strong style="display: flex; align-items: center; gap: 2px;">
+        Account &amp; Lists
+        <span style="font-size: 12px;">&#9662;</span>
+      </strong>
+      <div class="dropdown-menu" style="display:none; position:absolute; top:100%; left:0; background:#fff; color:#111; min-width:320px; box-shadow:0 2px 16px rgba(0,0,0,0.18); border-radius:8px; z-index:9999; padding:22px 28px 18px 28px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+          <svg width="36" height="36" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="#f3f3f3" stroke="#bbb" stroke-width="1.5"/>
+        <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#bbb"/>
+          </svg>
+          <div>
+        <a href="signup.html" style="display:inline-block; background:#ffd814; color:#111; font-weight:700; padding:8px 32px; border-radius:6px; font-size:16px; border:1px solid #fcd200; box-shadow:0 1px 2px rgba(0,0,0,0.04); text-align:center; margin-bottom:4px;">Sign in</a>
+        <div style="font-size:13px; color:#555; margin-top:2px;">New customer? <a href="signup.html" style="color:#007185;">Start here.</a></div>
+          </div>
+        </div>
+        <hr style="margin:12px 0;">
+        <div style="font-weight:600; font-size:15px; margin-bottom:8px;">Your Lists</div>
+        <ul style="list-style:none; padding:0; margin:0 0 14px 0;">
+          <li><a href="#" style="color:#111; font-size:14px;">Create a List</a></li>
+          <li><a href="#" style="color:#111; font-size:14px;">Find a List or Registry</a></li>
+        </ul>
+        <div style="font-weight:600; font-size:15px; margin-bottom:8px;">Your Account</div>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li><a href="#" style="color:#111; font-size:14px;">Account</a></li>
+          <li><a href="#" style="color:#111; font-size:14px;">Orders</a></li>
+          <li><a href="#" style="color:#111; font-size:14px;">Recommendations</a></li>
+          <li><a href="#" style="color:#111; font-size:14px;">Browsing History</a></li>
+          <li><a href="#" style="color:#111; font-size:14px;">Watchlist</a></li>
+        </ul>
+      </div>
+      
+    </div>
+    <script>
+      // Simple dropdown for Account & Lists (desktop + mobile)
+      const account = document.querySelector('.account.dropdown');
+      const dropdownMenu = account.querySelector('.dropdown-menu');
+      account.addEventListener('mouseenter', () => dropdownMenu.style.display = 'block');
+      account.addEventListener('mouseleave', () => dropdownMenu.style.display = 'none');
+      account.addEventListener('focusin', () => dropdownMenu.style.display = 'block');
+      account.addEventListener('focusout', () => dropdownMenu.style.display = 'none');
+      // Mobile/touch support
+      account.addEventListener('click', function(e) {
+        // Toggle dropdown on click/tap
+        if (dropdownMenu.style.display === 'block') {
+          dropdownMenu.style.display = 'none';
+        } else {
+          dropdownMenu.style.display = 'block';
+        }
+        e.stopPropagation();
+      });
+      // Hide dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!account.contains(e.target)) {
+          dropdownMenu.style.display = 'none';
+        }
+      });
+    </script>
+    <!-- Returns & Orders -->
+    <div class="returns d-none d-lg-block" style="min-width: 70px;">
+      <span style="font-size: 12px;">Returns</span><br />
+      <strong>&amp; Orders</strong>
+    </div>
+    <!-- Cart -->
+    <div class="cart d-flex align-items-center" style="min-width: 60px; font-size: 18px; position:relative;">
+      <span aria-label="Cart" style="font-size: 28px; margin-right: 4px; position:relative;">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;">
+          <path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM3 4h2l.4 2M7 13h10l4-8H5.4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span style="position:absolute; top:0; right:-8px; background:#f08804; color:#111; font-size:12px; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-weight:700;">0</span>
+      </span>
+      <strong style="margin-left:2px;">Cart</strong>
+    </div>
+  </div>
+</header>
+<!-- Secondary Navigation -->
+<div class="secondary-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-item" tabindex="0" id="openSideMenu" style="display: flex; align-items: center; gap: 6px; cursor: pointer; color: #fff;">
+    <span style="font-size: 20px;">&#9776;</span>
+    All
+  </div>
+  <a class="nav-item" tabindex="0" href="https://www.amazon.com/gp/goldbox" target="_blank" rel="noopener" style="color: #fff;">Today's Deals</a>
+  <a class="nav-item" tabindex="0" href="https://www.amazon.com/gp/help/customer/display.html" target="_blank" rel="noopener" style="color: #fff;">Customer Service</a>
+  <a class="nav-item" tabindex="0" href="https://www.amazon.com/registries" target="_blank" rel="noopener" style="color: #fff;">Registry</a>
+  <a class="nav-item" tabindex="0" href="https://www.amazon.com/gift-cards/b?ie=UTF8&node=2238192011" target="_blank" rel="noopener" style="color: #fff;">Gift Cards</a>
+  <a class="nav-item" tabindex="0" href="https://www.amazon.com/sell" target="_blank" rel="noopener" style="color: #fff;">Sell</a>
+  <a class="nav-item" tabindex="0" href="https://www.amazon.com/amazonbasics" target="_blank" rel="noopener" style="color: #fff;">Amazon Basics</a>
+</div>
+<!-- Sidebar -->
+<div id="sideMenu" class="side-menu" tabindex="-1" aria-labelledby="sideMenuLabel">
+  <div class="menu-header">
+  <span>
+    &#128100; Hello, sign in
+  </span>
+  <button type="button" class="close-btn" aria-label="Close" onclick="toggleMenu()">&times;</button>
+  </div>
+  <div class="menu-content" id="mainMenu">
+  <ul class="menu-list">
+    <li onclick="openSubMenu('Menu')">Menu</li>
+    <li onclick="openSubMenu('DigitalContent')">Digital Content & Devices</li>
+    <li onclick="openSubMenu('ShopByDepartment')">Shop By Department</li>
+    <li onclick="openSubMenu('Programs')">Programs & Features</li>
+    <li onclick="openSubMenu('Help')">Help & Settings</li>
+  </ul>
+  </div>
+  <div class="submenu" id="Menu">
+  <div class="back-btn" onclick="goBack()">&larr; <span>Main Menu</span></div>
+  <ul class="submenu-list">
+    <li><a href="https://www.amazon.com/s?k=car" target="_blank" rel="noopener">Cars</a></li>
+    <li><a href="https://www.amazon.com/s?k=tv" target="_blank" rel="noopener">TV</a></li>
+    <li><a href="https://www.amazon.com/s?k=video+games" target="_blank" rel="noopener">Video Games</a></li>
+    <li><a href="https://www.amazon.com/s?k=electronics" target="_blank" rel="noopener">Electronics</a></li>
+    <li><a href="https://www.amazon.com/s?k=health" target="_blank" rel="noopener">Health</a></li>
+    <li><a href="https://www.amazon.com/s?k=make+up" target="_blank" rel="noopener">Make Up</a></li>
+    <li><a href="https://www.amazon.com/s?k=home" target="_blank" rel="noopener">Home</a></li>
+    <li><a href="https://www.amazon.com/s?k=purchases+rentals" target="_blank" rel="noopener">Purchases & Rentals</a></li>
+    <li><a href="https://www.amazon.com/s?k=watches" target="_blank" rel="noopener">Watches</a></li>
+    <li><a href="https://www.amazon.com/s?k=bikes" target="_blank" rel="noopener">Bikes</a></li>
+    <li><a href="https://www.amazon.com/s?k=toys" target="_blank" rel="noopener">Toys</a></li>
+  </ul>
+  </div>
+  <div class="submenu" id="DigitalContent">
+  <div class="back-btn" onclick="goBack()">&larr; <span>Main Menu</span></div>
+  <ul class="submenu-list">
+    <li><a href="https://music.amazon.com/" target="_blank" rel="noopener">Amazon Music</a></li>
+    <li><a href="https://www.amazon.com/Kindle-eBooks/" target="_blank" rel="noopener">Kindle E-readers &amp; Books</a></li>
+    <li><a href="https://www.amazon.com/appstore" target="_blank" rel="noopener">Amazon Appstore</a></li>
+  </ul>
+  </div>
+  <div class="submenu" id="ShopByDepartment">
+  <div class="back-btn" onclick="goBack()">&larr; <span>Main Menu</span></div>
+  <ul class="submenu-list">
+    <li><a href="https://www.amazon.com/electronics-store/b?ie=UTF8&node=172282" target="_blank" rel="noopener">Electronics</a></li>
+    <li><a href="https://www.amazon.com/computers-accessories/b?ie=UTF8&node=541966" target="_blank" rel="noopener">Computers</a></li>
+    <li><a href="https://www.amazon.com/smarthome" target="_blank" rel="noopener">Smart Home</a></li>
+    <li><a href="https://www.amazon.com/arts-crafts-sewing/b?ie=UTF8&node=2617941011" target="_blank" rel="noopener">Arts &amp; Crafts</a></li>
+  </ul>
+  </div>
+  <div class="submenu" id="Programs">
+  <div class="back-btn" onclick="goBack()">&larr; <span>Main Menu</span></div>
+  <ul class="submenu-list">
+    <li><a href="https://www.amazon.com/gift-cards/b?ie=UTF8&node=2238192011" target="_blank" rel="noopener">Gift Cards</a></li>
+    <li><a href="https://www.amazon.com/founditonamazon" target="_blank" rel="noopener">#FoundItOnAmazon</a></li>
+    <li><a href="https://www.amazon.com/live" target="_blank" rel="noopener">Amazon Live</a></li>
+    <li><a href="https://www.amazon.com/international-sales-offers/b?ie=UTF8&node=15529609011" target="_blank" rel="noopener">International Shopping</a></li>
+  </ul>
+  </div>
+  <div class="submenu" id="Help">
+  <div class="back-btn" onclick="goBack()">&larr; <span>Main Menu</span></div>
+  <ul class="submenu-list">
+    <li><a href="#">Your Account</a></li>
+    <li>English</li>
+    <li>Customer Service</li>
+    <li>Sign In</li>
+  </ul>
+  </div>
+</div>
+<script>
+  document.getElementById('openSideMenu').addEventListener('click', function() {
+  document.getElementById('sideMenu').classList.add('open');
+  goBack();
+  });
+  document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('sideMenu').classList.remove('open');
+  }
+  });
+  document.getElementById('sideMenu').classList.remove('open');
+</script>
+<div class="container mt-4" style="margin-top:0 !important; padding-top:0 !important;"></div>
+  <!-- Hero Banner -->
+  <div class="hero-banner" id="hero-banner" aria-label="Promotional banner">
+    <div class="slider" id="slider">
+      <div class="slide"><img src="https://m.media-amazon.com/images/I/61lwJy4B8PL._SX3000_.jpg" alt="Amazon Deal 1"/></div>
+      <div class="slide"><img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Amazon Deal 2"/></div>
+      <div class="slide"><img src="https://m.media-amazon.com/images/I/61zAjw4bqPL._SX3000_.jpg" alt="Amazon Deal 3"/></div>
+    </div>
+    <div class="arrows">
+      <span class="arrow" id="prev" aria-label="Previous Slide">&#10094;</span>
+      <span class="arrow" id="next" aria-label="Next Slide">&#10095;</span>
+    </div>
+    <div class="dots" id="dots" role="tablist"></div>
+  </div>
+  <script>
+    // Auto-slide for hero banner
+    let autoSlideInterval;
+    function startAutoSlide() {
+      stopAutoSlide();
+      autoSlideInterval = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 4000);
+    }
+    function stopAutoSlide() {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+    }
+    // Start auto-slide on load and pause on hover/focus
+    document.getElementById('hero-banner').addEventListener('mouseenter', stopAutoSlide);
+    document.getElementById('hero-banner').addEventListener('mouseleave', startAutoSlide);
+    document.getElementById('hero-banner').addEventListener('focusin', stopAutoSlide);
+    document.getElementById('hero-banner').addEventListener('focusout', startAutoSlide);
+    window.addEventListener('DOMContentLoaded', startAutoSlide);
+  </script>
+  <!-- Product Sections -->
+  <div class="container my-4">
+    <!-- Example: Featured Deals Section -->
+    <div class="product-section" aria-label="Featured Deals">
+      <div class="section-header">
+        <h2>Featured Deals</h2>
+        <a href="https://www.amazon.com/gp/goldbox" class="see-all" aria-label="See all Featured Deals">See all</a>
+      </div>
+      <div class="product-row" tabindex="0">
+        <div class="product-box" role="group" aria-label="Apple AirPods Pro">
+          <img src="https://m.media-amazon.com/images/I/71bhWgQK-cL._AC_SL1500_.jpg" alt="Apple AirPods Pro" />
+          <p class="product-title">Apple AirPods Pro (2nd Generation)</p>
+          <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$199.99 <span style="color:#007600;font-size:13px;">&nbsp;Save 20%</span></div>
+        </div>
+        <div class="product-box" role="group" aria-label="Fire TV Stick 4K">
+          <img src="https://m.media-amazon.com/images/I/51CgKGfMelL._AC_SL1000_.jpg" alt="Fire TV Stick 4K" />
+          <p class="product-title">Fire TV Stick 4K Streaming Device</p>
+          <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$29.99 <span style="color:#007600;font-size:13px;">&nbsp;Deal</span></div>
+        </div>
+        <div class="product-box" role="group" aria-label="Ninja Air Fryer">
+          <img src="https://m.media-amazon.com/images/I/81O+GNdkzKL._AC_SL1500_.jpg" alt="Ninja Air Fryer" />
+          <p class="product-title">Ninja AF101 Air Fryer, 4 Qt</p>
+          <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$89.99 <span style="color:#B12704;font-size:13px;">&nbsp;Limited time</span></div>
+        </div>
+        <div class="product-box" role="group" aria-label="Samsung 32-Inch Monitor">
+          <img src="https://m.media-amazon.com/images/I/81r8JazBSSL._AC_SL1500_.jpg" alt="Samsung 32-Inch Monitor" />
+          <p class="product-title">Samsung 32" 4K UHD Monitor</p>
+          <div class="product-rating" aria-label="4.6 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$249.99 <span style="color:#007600;font-size:13px;">&nbsp;Save $50</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Example: Shop by Category Section -->
+    <div class="product-section" aria-label="Shop by Category">
+      <div class="section-header">
+        <h2>Shop by Category</h2>
+        <a href="https://www.amazon.com/gp/site-directory" class="see-all" aria-label="See all Categories">See all</a>
+      </div>
+      <div class="product-row" tabindex="0">
+        <div class="product-box" role="group" aria-label="Electronics">
+          <img src="https://m.media-amazon.com/images/I/71p11p2YJIL._AC_SL1500_.jpg" alt="Electronics" />
+          <p class="product-title">Electronics</p>
+        </div>
+        <div class="product-box" role="group" aria-label="Home & Kitchen">
+          <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Home & Kitchen" />
+          <p class="product-title">Home &amp; Kitchen</p>
+        </div>
+        <div class="product-box" role="group" aria-label="Fashion">
+          <img src="https://m.media-amazon.com/images/I/81fPKd-2AYL._AC_UL1500_.jpg" alt="Fashion" />
+          <p class="product-title">Fashion</p>
+        </div>
+        <div class="product-box" role="group" aria-label="Toys & Games">
+          <img src="https://m.media-amazon.com/images/I/81eA+u8r6-L._AC_SL1500_.jpg" alt="Toys & Games" />
+          <p class="product-title">Toys &amp; Games</p>
+        </div>
+      </div>
+    </div>
+    <!-- Example: Amazon Devices Section -->
+    <div class="product-section" aria-label="Amazon Devices">
+      <div class="section-header">
+        <h2>Amazon Devices</h2>
+        <a href="https://www.amazon.com/amazon-devices/b?ie=UTF8&node=2102313011" class="see-all" aria-label="See all Amazon Devices">See all</a>
+      </div>
+      <div class="product-row" tabindex="0">
+        <div class="product-box" role="group" aria-label="Echo Dot 5th Gen">
+          <img src="https://m.media-amazon.com/images/I/61u48FEsQKL._AC_SL1000_.jpg" alt="Echo Dot 5th Gen" />
+          <p class="product-title">Echo Dot (5th Gen, 2022 release)</p>
+          <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$39.99</div>
+        </div>
+        <div class="product-box" role="group" aria-label="Kindle Paperwhite">
+          <img src="https://m.media-amazon.com/images/I/61n5mKjK5zL._AC_SL1000_.jpg" alt="Kindle Paperwhite" />
+          <p class="product-title">Kindle Paperwhite (8 GB)</p>
+          <div class="product-rating" aria-label="4.6 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$139.99</div>
+        </div>
+        <div class="product-box" role="group" aria-label="Fire HD 10 Tablet">
+          <img src="https://m.media-amazon.com/images/I/61VfL-aiToL._AC_SL1000_.jpg" alt="Fire HD 10 Tablet" />
+          <p class="product-title">Fire HD 10 Tablet, 10.1"</p>
+          <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐☆</div>
+          <div class="product-price">$119.99</div>
+        </div>
+        <div class="product-box" role="group" aria-label="Ring Video Doorbell">
+          <img src="https://m.media-amazon.com/images/I/71pWzhdJNwL._AC_SL1500_.jpg" alt="Ring Video Doorbell" />
+          <p class="product-title">Ring Video Doorbell (2020 Release)</p>
+          <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+          <div class="product-price">$99.99</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="Best Sellers in Home & Kitchen">
+    <div class="section-header">
+      <h2>Best Sellers in Home & Kitchen</h2>
+      <a href="https://example.com/home-kitchen" class="see-all" aria-label="See all Best Sellers in Home & Kitchen">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Instant Pot Duo">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Instant Pot Duo" />
+        <p class="product-title">Instant Pot Duo 7-in-1 Electric Pressure Cooker</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$89.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Dyson V11 Vacuum">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Dyson V11 Vacuum" />
+        <p class="product-title">Dyson V11 Torque Drive Cordless Vacuum Cleaner</p>
+        <div class="product-rating" aria-label="4.6 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$599.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Brita Water Pitcher">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Brita Water Pitcher" />
+        <p class="product-title">Brita Large Water Filter Pitcher</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐½</div>
+        <div class="product-price">$34.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Philips Wake-Up Light">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Philips Wake-Up Light" />
+        <p class="product-title">Philips SmartSleep Wake-Up Light</p>
+        <div class="product-rating" aria-label="4.4 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$49.95</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="Trending in Fashion">
+    <div class="section-header">
+      <h2>Trending in Fashion</h2>
+      <a href="https://example.com/fashion-trends" class="see-all" aria-label="See all Trending in Fashion">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Levi's 501 Jeans">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Levi's 501 Jeans" />
+        <p class="product-title">Levi's Men's 501 Original Fit Jeans</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$59.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Adidas Ultraboost">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Adidas Ultraboost" />
+        <p class="product-title">Adidas Ultraboost 21 Running Shoes</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$180.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Ray-Ban Sunglasses">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Ray-Ban Sunglasses" />
+        <p class="product-title">Ray-Ban RB2132 New Wayfarer Sunglasses</p>
+        <div class="product-rating" aria-label="4.6 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$99.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Fossil Women's Watch">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Fossil Women's Watch" />
+        <p class="product-title">Fossil Women's Riley Stainless Steel Watch</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$89.00</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="Popular in Sports & Outdoors">
+    <div class="section-header">
+      <h2>Popular in Sports & Outdoors</h2>
+      <a href="https://example.com/sports-outdoors" class="see-all" aria-label="See all Popular in Sports & Outdoors">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Fitbit Charge 5">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Fitbit Charge 5" />
+        <p class="product-title">Fitbit Charge 5 Advanced Fitness Tracker</p>
+        <div class="product-rating" aria-label="4.6 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$149.95</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Hydro Flask Water Bottle">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Hydro Flask Water Bottle" />
+        <p class="product-title">Hydro Flask Stainless Steel Water Bottle</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$39.95</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Coleman Camping Tent">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Coleman Camping Tent" />
+        <p class="product-title">Coleman Sundome Camping Tent</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$89.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Wilson Evolution Basketball">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Wilson Evolution Basketball" />
+        <p class="product-title">Wilson Evolution Game Basketball</p>
+        <div class="product-rating" aria-label="4.9 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$64.95</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="Product Categories">
+    <div class="section-header">
+      <h2>Product Categories</h2>
+      <a href="https://example.com/house-products" class="see-all" aria-label="See all House products">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Echo Show 8">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Echo Show 8" />
+        <p class="product-title">Echo Show 8 (2nd Gen) HD Smart Display with Alexa</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$129.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Logitech MX Master 3">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Logitech MX Master 3" />
+        <p class="product-title">Logitech MX Master 3 Advanced Wireless Mouse</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$99.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Nespresso VertuoPlus">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Nespresso VertuoPlus" />
+        <p class="product-title">Nespresso VertuoPlus Coffee and Espresso Maker</p>
+        <div class="product-rating" aria-label="4.2 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$179.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Samsung Galaxy Watch 5">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Samsung Galaxy Watch 5" />
+        <p class="product-title">Samsung Galaxy Watch 5 Smartwatch</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$279.99</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="Top Sellers in Electronics">
+    <div class="section-header">
+      <h2>Top Sellers in Electronics</h2>
+      <a href="https://example.com/top-sellers" class="see-all" aria-label="See all Top Sellers in Electronics">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Apple iPhone 14">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Apple iPhone 14" />
+        <p class="product-title">Apple iPhone 14 (128GB)</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$799.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Sony WH-1000XM4">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Sony WH-1000XM4" />
+        <p class="product-title">Sony WH-1000XM4 Wireless Headphones</p>
+        <div class="product-rating" aria-label="4.6 out of 5 stars">⭐⭐⭐⭐½</div>
+        <div class="product-price">$348.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Kindle Paperwhite">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Kindle Paperwhite" />
+        <p class="product-title">Kindle Paperwhite Signature Edition</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐½</div>
+        <div class="product-price">$139.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Fitbit Versa 3">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Fitbit Versa 3" />
+        <p class="product-title">Fitbit Versa 3 Health & Fitness Smartwatch</p>
+        <div class="product-rating" aria-label="4.3 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$179.95</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="New Releases">
+    <div class="section-header">
+      <h2>New Releases</h2>
+      <a href="https://example.com/new-releases" class="see-all" aria-label="See all New Releases">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Echo Show 8">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Echo Show 8" />
+        <p class="product-title">Echo Show 8 (2nd Gen) HD Smart Display with Alexa</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$129.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Logitech MX Master 3">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Logitech MX Master 3" />
+        <p class="product-title">Logitech MX Master 3 Advanced Wireless Mouse</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$99.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Nespresso VertuoPlus">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Nespresso VertuoPlus" />
+        <p class="product-title">Nespresso VertuoPlus Coffee and Espresso Maker</p>
+        <div class="product-rating" aria-label="4.2 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$179.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Samsung Galaxy Watch 5">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Samsung Galaxy Watch 5" />
+        <p class="product-title">Samsung Galaxy Watch 5 Smartwatch</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$279.99</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="Top products">
+    <div class="section-header">
+      <h2>Top products</h2>
+      <a href="https://example.com/top-products" class="see-all" aria-label="See all Top products">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Echo Show 8">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Echo Show 8" />
+        <p class="product-title">Echo Show 8 (2nd Gen) HD Smart Display with Alexa</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$129.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Logitech MX Master 3">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Logitech MX Master 3" />
+        <p class="product-title">Logitech MX Master 3 Advanced Wireless Mouse</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$99.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Nespresso VertuoPlus">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Nespresso VertuoPlus" />
+        <p class="product-title">Nespresso VertuoPlus Coffee and Espresso Maker</p>
+        <div class="product-rating" aria-label="4.2 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$179.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Samsung Galaxy Watch 5">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Samsung Galaxy Watch 5" />
+        <p class="product-title">Samsung Galaxy Watch 5 Smartwatch</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$279.99</div>
+      </div>
+    </div>
+  </div>
+  <div class="product-section" aria-label="House product">
+    <div class="section-header">
+      <h2>House product</h2>
+      <a href="https://example.com/house-products" class="see-all" aria-label="See all House products">See all</a>
+    </div>
+    <div class="product-row" tabindex="0">
+      <div class="product-box" role="group" aria-label="Echo Show 8">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Echo Show 8" />
+        <p class="product-title">Echo Show 8 (2nd Gen) HD Smart Display with Alexa</p>
+        <div class="product-rating" aria-label="4.7 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$129.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Logitech MX Master 3">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Logitech MX Master 3" />
+        <p class="product-title">Logitech MX Master 3 Advanced Wireless Mouse</p>
+        <div class="product-rating" aria-label="4.8 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$99.99</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Nespresso VertuoPlus">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Nespresso VertuoPlus" />
+        <p class="product-title">Nespresso VertuoPlus Coffee and Espresso Maker</p>
+        <div class="product-rating" aria-label="4.2 out of 5 stars">⭐⭐⭐⭐☆</div>
+        <div class="product-price">$179.00</div>
+      </div>
+      <div class="product-box" role="group" aria-label="Samsung Galaxy Watch 5">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Samsung Galaxy Watch 5" />
+        <p class="product-title">Samsung Galaxy Watch 5 Smartwatch</p>
+        <div class="product-rating" aria-label="4.5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+        <div class="product-price">$279.99</div>
+      </div>
+    </div>
+  </div>
+<div class="back-to-top" id="backToTopBtn">Back to top</div>
+<div class="row justify-content-center mb-4"></div>
+<footer>
+  <div class="container">
+    <div class="row py-4 justify-content-center flex-wrap" role="contentinfo" style="overflow-x:visible;">
+      <div class="col-md-3 col-sm-6 col-6 mb-3" aria-label="Get to Know Us" style="min-width:180px; flex:1 0 180px; max-width:220px;">
+        <h4>Get to Know Us</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">About Amazon</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Amazon Devices</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-sm-6 col-6 mb-3" aria-label="Make Money with Us" style="min-width:180px; flex:1 0 180px; max-width:220px;">
+        <h4>Make Money with Us</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Sell products on Amazon</a></li>
+          <li><a href="#">Sell apps on Amazon</a></li>
+          <li><a href="#">Become an Affiliate</a></li>
+          <li><a href="#">Advertise Your Products</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-sm-6 col-6 mb-3" aria-label="Amazon Payment Products" style="min-width:180px; flex:1 0 180px; max-width:220px;">
+        <h4>Amazon Payment Products</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Amazon Rewards Visa Signature Cards</a></li>
+          <li><a href="#">Amazon.com Store Card</a></li>
+          <li><a href="#">Amazon Business Card</a></li>
+          <li><a href="#">Shop with Points</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-sm-6 col-6 mb-3" aria-label="Let Us Help You" style="min-width:180px; flex:1 0 180px; max-width:220px;">
+        <h4>Let Us Help You</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Your Account</a></li>
+          <li><a href="#">Shipping Rates & Policies</a></li>
+          <li><a href="#">Returns & Replacements</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+
+<div class="text-center py-3" style="font-size:13px; color:#e9dfdf; background-color: #0c0b0b;">
+  © 2025 Amazon Clone. All rights reserved.<br>
+  This site is a demo and not affiliated with Amazon.com
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Hero slider script
+    const slider = document.getElementById("slider");
+    const slides = slider.children;
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const dotsContainer = document.getElementById("dots");
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    function createDots() {
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-selected", i === 0 ? "true" : "false");
+        dot.setAttribute("tabindex", i === 0 ? "0" : "-1");
+        dot.addEventListener("click", () => {
+          goToSlide(i);
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+    function updateDots() {
+      const dots = dotsContainer.children;
+      for (let i = 0; i < dots.length; i++) {
+        if (i === currentIndex) {
+          dots[i].classList.add("active");
+          dots[i].setAttribute("aria-selected", "true");
+          dots[i].setAttribute("tabindex", "0");
+        } else {
+          dots[i].classList.remove("active");
+          dots[i].setAttribute("aria-selected", "false");
+          dots[i].setAttribute("tabindex", "-1");
+        }
+      }
+    }
+    function goToSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      currentIndex = index;
+      slider.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
+    }
+    prevBtn.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+    nextBtn.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+    dotsContainer.addEventListener("keydown", (e) => {
+      if(e.key === "ArrowRight") {
+        goToSlide(currentIndex + 1);
+        dotsContainer.children[currentIndex].focus();
+      }
+      if(e.key === "ArrowLeft") {
+        goToSlide(currentIndex - 1);
+        dotsContainer.children[currentIndex].focus();
+      }
+    });
+    createDots();
+    updateDots();
+    // Back to Top button script
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+    }
+    // Sidebar menu functions
+    window.toggleMenu = function() {
+      const menu = document.getElementById('sideMenu');
+      const isOpen = menu.classList.toggle('open');
+      if (isOpen) {
+        goBack();
+      }
+    }
+    window.openSubMenu = function(id) {
+      document.getElementById('mainMenu').style.display = 'none';
+      document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+    window.goBack = function() {
+      document.getElementById('mainMenu').style.display = 'block';
+      document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+  
