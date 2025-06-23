@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/891/891462.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    html, body {
+      height: 100%;
+    }
+   body {
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Remove vertical centering for better scrolling */
+  /* justify-content: center; */
+  min-height: 100vh;
+  /* Remove max-height */
+  /* max-height: fit-content; */
+  padding: 20px;
+}
+    .container {
+      max-width: 420px;
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 1rem auto;
+      width: 60px;
+    }
+    .btn-primary {
+      background: #007bff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #0056b3;
+    }
+    .form-group label {
+      font-weight: 500;
+    }
+    .form-text {
+      font-size: 0.9em;
+    }
+    .text-center a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .text-center a:hover {
+      text-decoration: underline;
+    }
+    .voice-controls {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .voice-controls button {
+      margin: 0 10px;
+      padding: 8px 15px;
+    }
+  </style>
+</head>
+<body>
+    
+<div class="container">
+    <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Store Logo" class="logo">
+    <h2 class="mb-3 text-center">Create Your Account</h2>
+    <form id="signupForm" autocomplete="on" novalidate>
+        <div class="form-group">
+            <label for="signupName">Full Name</label>
+            <input type="text" class="form-control" id="signupName" name="fullname" placeholder="e.g. John Doe" required pattern="^[A-Za-z\s]{2,}$" autocomplete="name">
+            <div class="invalid-feedback">Please enter your full name (letters only).</div>
+        </div>
+        <div class="form-group">
+            <label for="signupUsername">Username</label>
+            <input type="text" class="form-control" id="signupUsername" name="username" placeholder="Choose a username" required pattern="^[a-zA-Z0-9_]{4,}$" autocomplete="username">
+            <div class="invalid-feedback">Username must be at least 4 characters and contain only letters, numbers, or underscores.</div>
+        </div>
+        <div class="form-group">
+            <label for="signupDob">Date of Birth</label>
+            <input type="date" class="form-control" id="signupDob" name="dob" required>
+            <div class="invalid-feedback">You must be at least 18 years old.</div>
+        </div>
+        <div class="form-group">
+            <label for="signupEmail">Email address</label>
+            <input type="email" class="form-control" id="signupEmail" name="email" placeholder="you@example.com" required autocomplete="email">
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" class="form-control" id="signupPassword" name="password" placeholder="At least 8 characters" required minlength="8" autocomplete="new-password">
+            <small class="form-text text-muted">Password must be at least 8 characters.</small>
+            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+        </div>
+        <div class="form-group">
+            <label for="signupConfirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="signupConfirmPassword" name="confirm_password" placeholder="Re-enter your password" required minlength="8" autocomplete="new-password">
+            <div class="invalid-feedback" id="confirmPasswordError">Passwords do not match.</div>
+        </div>
+        <div class="form-check mt-2">
+            <input type="checkbox" class="form-check-input" id="showPassword" onclick="togglePassword()">
+            <label class="form-check-label" for="showPassword">Show Passwords</label>
+        </div>
+        <div class="form-group">
+            <label for="signupPhone">Phone Number <span data-toggle="tooltip" title="Optional, for account recovery">(?)</span></label>
+            <input type="tel" class="form-control" id="signupPhone" name="phone" placeholder="e.g. +12345678901" pattern="^\+?\d{10,15}$" autocomplete="tel">
+            <div class="invalid-feedback">Please enter a valid phone number.</div>
+        </div>
+        <div class="form-group form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">I agree to the <a href="#">Terms and Conditions</a></label>
+            <div class="invalid-feedback">You must agree before submitting.</div>
+        </div>
+        <div class="voice-controls">
+            <button type="button" class="btn btn-success" onclick="startListening()">🎤 Start Voice Input</button>
+            <button type="button" class="btn btn-danger" onclick="stopListening()">🛑 Stop</button>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        <div class="text-center mt-3">
+            Already have an account? <a href="#">Sign In</a>
+        </div>
+    </form>
+</div>
+
+  <!-- JS Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Tooltips -->
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const dob = document.getElementById('signupDob');
+      const today = new Date();
+      const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+      dob.max = maxDate.toISOString().split('T')[0];
+    });
+
+    function togglePassword() {
+      const pwd = document.getElementById("signupPassword");
+      const cpwd = document.getElementById("signupConfirmPassword");
+      const type = pwd.type === "password" ? "text" : "password";
+      pwd.type = cpwd.type = type;
+    }
+
+    (function () {
+      'use strict';
+      const form = document.getElementById('signupForm');
+      const pwd = document.getElementById('signupPassword');
+      const cpwd = document.getElementById('signupConfirmPassword');
+
+      form.addEventListener('submit', function (event) {
+        if (pwd.value !== cpwd.value) {
+          cpwd.setCustomValidity("Passwords do not match.");
+        } else {
+          cpwd.setCustomValidity("");
+        }
+
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    })();
+  </script>
+
+  <!-- Voice Input Script -->
+  <script>
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition;
+    let currentField = null;
+
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+
+        if (transcript.includes("name")) {
+          currentField = document.getElementById("signupName");
+        } else if (transcript.includes("username")) {
+          currentField = document.getElementById("signupUsername");
+        } else if (transcript.includes("email")) {
+          currentField = document.getElementById("signupEmail");
+        } else if (transcript.includes("password") && !transcript.includes("confirm")) {
+          currentField = document.getElementById("signupPassword");
+        } else if (transcript.includes("confirm password")) {
+          currentField = document.getElementById("signupConfirmPassword");
+        } else if (transcript.includes("phone")) {
+          currentField = document.getElementById("signupPhone");
+        } else if (transcript.includes("date of birth") || transcript.includes("birthday")) {
+          currentField = document.getElementById("signupDob");
+        } else if (currentField) {
+          currentField.value += (currentField.value ? " " : "") + transcript;
+        }
+
+        if (currentField) currentField.focus();
+      };
+
+      recognition.onerror = function(event) {
+        console.error("Speech recognition error:", event.error);
+      };
+    } else {
+      alert("Your browser does not support speech recognition. Please use Google Chrome.");
+    }
+
+    function startListening() {
+      if (recognition) recognition.start();
+    }
+
+    function stopListening() {
+      if (recognition) recognition.stop();
+    }
+  </script>
+</body>
+</html>
